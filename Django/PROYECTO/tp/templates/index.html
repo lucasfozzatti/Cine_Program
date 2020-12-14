@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content= "ie=edge">
+    <title>{%block titulo%}Sala de cine{%endblock titulo%}</title>
+</head>
+<body>
+    {%block cuerpo%}
+    <h1>Template de cine</h1>
+    <table border= "3">
+        <thead>
+
+            <tr>
+                <th>Nombre</th>
+                <th>Duracion</th>
+                <th>Descripcion</th>
+                <th>Detalles</th>
+                <th>Genero</th>
+                <th>Clasificación</th>
+                <th>Estado</th>
+                <th>Fecha de inicio</th>
+                <th>Fecha de finalizacion</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in pelicula %}
+                <tr>
+                    <td>{{ i.name }}</td>
+                    <td>{{ i.duration }}</td>
+                    <td>{{ i.description }}</td>
+                    <td>{{ i.detail}}</td>
+                    <td>{{ i.gender }}</td>
+                    <td>{{ i.classification }}</td>
+                    <td>{{ i.status }}</td>
+                    <td>{{ i.start_date }}</td>
+                    <td>{{ i.end_date }}</td>
+
+
+                    
+                </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+    {%endblock cuerpo%}
+</body>
+</html>

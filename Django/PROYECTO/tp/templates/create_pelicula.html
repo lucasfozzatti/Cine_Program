@@ -1,0 +1,11 @@
+{%extends 'index.html' %}
+{%block titulo%}Pelicula{%endblock titulo%}
+{%block cuerpo%}
+
+<form method="post"; style="margin: 8px;padding-inline-start: 2%;inline-size: 8%;">
+    {%csrf_token%}
+    {{ form.as_p }}
+    <button type="">CREAR</button>
+</form>
+
+{%endblock cuerpo%}
