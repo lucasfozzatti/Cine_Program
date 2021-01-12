@@ -15,17 +15,24 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Aplicaciones.principal.views import inicio, crear_pelicula, tabla_fecha, tabla_rango
+from Aplicaciones.principal.views import *
 from django.conf.urls import url
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('index', inicio, name = 'index'),
-    path('create_pelicula/', crear_pelicula, name = 'create_pelicula'),
-    url(r'tabla_fecha', tabla_fecha, name='tabla_fecha'),
-    url(r'^(\d{4}[-/]\d{2}[-/]\d{2})/(\d{4}[-/]\d{2}[-/]\d{2})$', tabla_rango),
-    
-]
+    #path('index', inicio, name = 'index'),
+    url(r'^api/peliculas', traer_peliculas),
+    #path('salas_crear/', salas_crear, name = 'salas_crear'),
+   # url(r'tabla_fecha', tabla_fecha, name='tabla_fecha'),
+    url(r'^api/([0-9]+)/(\d{4}[-/]\d{2}[-/]\d{2})/(\d{4}[-/]\d{2}[-/]\d{2})$', tabla_rango),
+    #url(r'tabla', tabla, name='tabla'),
+    url(r'^api/salas', salas, name='salas'),
+    url(r'^api/sala_detalle/([a-zA-Z0-9 ]+)$', sala_detalle),
+    url(r'^api/tabla', tabla, name='tabla'),
+
+
+    ]
 
 # urlpatterns = [
 #     path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('img/favicon.ico'))),

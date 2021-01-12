@@ -22,22 +22,30 @@ class Pelicula(models.Model):
 
 
 class Sala(models.Model):
+    id = models.AutoField(primary_key = True)
     name = models.CharField(max_length=70, blank=False)
     status = models.CharField(max_length=15)
     row = models.IntegerField()
     seat = models.IntegerField()
 
+    def __str__(self):
+        return self.name
+
+
 
 class Proyeccion(models.Model):
+    id = models.AutoField(primary_key = True)
     sala = models.ForeignKey(Sala, on_delete=models.CASCADE)
     pelicula = models.ForeignKey(Pelicula, on_delete=models.CASCADE)
     start_date = models.DateField()
     end_date = models.DateField()
     time = models.TimeField()   # Hora de proyeccion
     status = models.CharField(max_length=10)
-
+    def __str__(self):
+        return str(self.pelicula)
 
 class Reserva(models.Model):
+    id = models.AutoField(primary_key = True)
     proyeccion = models.ForeignKey(Proyeccion, on_delete=models.CASCADE)
     time_r = models.DateField()
     row = models.IntegerField()

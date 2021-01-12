@@ -7,3 +7,8 @@ class PeliculasForm(forms.ModelForm):
         model = Pelicula
         fields = '__all__'
         
+class SalaForm(forms.ModelForm):
+    class Meta:
+        model = Pelicula
+        fields = '__all__'
+        
