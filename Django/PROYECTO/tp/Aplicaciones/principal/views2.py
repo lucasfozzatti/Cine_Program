@@ -72,10 +72,30 @@ def sala_detalle(request, nombre):
         sala_serializer = SalaSerializer(sala)
         return JsonResponse(sala_serializer.data, status=status.HTTP_200_OK)
 
-    elif request.method == 'PUT': 
-        sala_data = JSONParser().parse(request) 
-        salas_serializer = SalaSerializer(sala, data=sala_data) 
-        if salas_serializer.is_valid(): 
-            salas_serializer.save() 
-            return JsonResponse(salas_serializer.data, status=status.HTTP_200_OK) 
-        return JsonResponse(salas_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+   #.....VER PUT Y DELETE ......
+    elif request.method == 'PUT':
+                sala_data = JSONParser().parse(request)
+                sala_serializer = SalaSerializer(sala, data=sala_data)
+                if sala_serializer.is_valid():
+                    proyecciones = Proyeccion.objects.filter(sala=sala)
+                    if (proyecciones.count() != 0):
+                        for proyeccion in proyecciones:
+                            if(proyeccion.estado):
+                                return JsonResponse({'Mensaje':
+                                                    'Sala asociada, deshabilite la proyeccion para editar la sala'})
+                    sala_serializer.save()
+                    return JsonResponse(sala_serializer.data)
+                return JsonResponse(sala_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    elif request.method == 'DELETE':
+            sala.delete()
+            return JsonResponse({'Mensaje': 'La sala se elimino correctamente'}, status=status.HTTP_204_NO_CONTENT)
+            
+@api_view(['GET', 'POST'])
+
+def proyecciones(request):  
+    if request.method == 'GET':
+        pelicula = serializers.serialize('json', Pelicula.objects.filter(start_date = datetime.datetime.now()))
+        print(datetime.datetime.now)
+        print(pelicula)
+        return HttpResponse(pelicula)

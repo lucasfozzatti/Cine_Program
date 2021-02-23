@@ -8,7 +8,7 @@
 </head>
 <body>
     {%block cuerpo%}
-    <h1>Template de cine</h1>
+    <h1>Listado de Peliculas</h1>
     <table border= "3">
         <thead id='aaa'>
 
@@ -27,15 +27,15 @@
         <tbody>
             {% for i in pelicula %}
                 <tr>
-                    <td>{{ i.name }}</td>
-                    <td>{{ i.duration }}</td>
-                    <td>{{ i.description }}</td>
-                    <td>{{ i.detail}}</td>
-                    <td>{{ i.gender }}</td>
-                    <td>{{ i.classification }}</td>
-                    <td>{{ i.status }}</td>
-                    <td>{{ i.start_date }}</td>
-                    <td>{{ i.end_date }}</td>
+                    <td>{{ i.nombre }}</td>
+                    <td>{{ i.duracion }}</td>
+                    <td>{{ i.descripcion}}</td>
+                    <td>{{ i.detalle}}</td>
+                    <td>{{ i.genero }}</td>
+                    <td>{{ i.clasificacion }}</td>
+                    <td>{{ i.estado }}</td>
+                    <td>{{ i.fechaComienzo }}</td>
+                    <td>{{ i.fechaFinalizacion }}</td>
 
 
                     

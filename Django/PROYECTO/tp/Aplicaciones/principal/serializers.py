@@ -7,15 +7,15 @@ class PeliculaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pelicula
         fields = ('id',
-                  'name',
-                  'duration',
-                  'description',
-                  'detail',
-                  'gender',
-                  'classification',
-                  'status',
-                  'start_date',
-                  'end_date')
+                  'nombre',
+                  'duracion',
+                  'descripcion',
+                  'detalle',
+                  'genero',
+                  'clasificacion',
+                  'estado',
+                  'fechaComienzo',
+                  'fechaFinalizacion')
 
 
 class ProyeccionSerializer(serializers.ModelSerializer):
@@ -23,10 +23,10 @@ class ProyeccionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Proyeccion
         fields = ('id',
-                  'start_date',
-                  'end_date',
-                  'time',
-                  'status',
+                  'fecha_inicio',
+                  'fecha_fin',
+                  'hora',
+                  'estado',
                   'pelicula',
                   'sala')
 
@@ -36,10 +36,10 @@ class SalaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sala
         fields = ('id',
-                  'name',
-                  'status',
-                  'row',
-                  'seat')
+                  'nombre',
+                  'estado',
+                  'filas',
+                  'asientos')
 
 
 class ReservaSerializer(serializers.ModelSerializer):
@@ -47,7 +47,7 @@ class ReservaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reserva
         fields = ('id',
-                  'time_r',
-                  'row',
-                  'seat',
+                  'fecha',
+                  'filas',
+                  'asientos',
                   'proyeccion')
