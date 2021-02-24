@@ -13,7 +13,7 @@ from django.core.exceptions import PermissionDenied
 import datetime as dt
 import urllib
 import json
-
+import dateutil.parser
 
 
 @api_view(['GET'])
@@ -198,6 +198,18 @@ def proyeccion_new(request, id):
 
     if request.method == 'POST':
         sala_post = JSONParser().parse(request)
+        pelicula = Pelicula.objects.values("fechaComienzo", "fechaFinalizacion").get(id=sala_post["pelicula"])
+        #Comprueba que cuando creo proyeccion se ubique en el rango de la pelicula
+        fecha1 = dateutil.parser.parse(sala_post["fecha_inicio"]).date()
+        fecha2 = dateutil.parser.parse(sala_post["fecha_fin"]).date()
+        fecha_C = dateutil.parser.parse(str(pelicula["fechaComienzo"])).date()
+
+        fecha_F = dateutil.parser.parse(str(pelicula["fechaFinalizacion"])).date()
+        print("hola", fecha_F, fecha1)
+        if fecha_C >= fecha1 and fecha_F <= fecha2:
+            return JsonResponse({'Error': 'Fecha fuera de rango'}, status=status.HTTP_400_BAD_REQUEST)
+            
+        
         proyeccion_serialazer = ProyeccionSerializer(data=sala_post)
         if proyeccion_serialazer.is_valid():
             proyeccion_serialazer.save()
